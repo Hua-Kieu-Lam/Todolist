@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import './index.css';
+import { useState, useEffect } from 'react';
 import 'boxicons/css/boxicons.min.css';
+import { format } from 'date-fns';
 function App() {
   const [task, setTask] = useState('');
   const [taskList, setTaskList] = useState(() => {
@@ -19,7 +19,12 @@ function App() {
   }
   const handleAdd = () => {
     if (task.trim() !== '') {
-      setTaskList(prev => [...prev, { name: task, completed: false }]);
+      const newTask = {
+        name: task,
+        completed: false,
+        createAt: format(new Date(), 'dd-MMM-yyyy HH:mm:ss')
+      }
+      setTaskList(prev => [...prev, newTask]);
     } else {
       setError(true)
     }
@@ -74,20 +79,23 @@ function App() {
       {error && <div style={{ display: 'block' }} className="todo-list__show-error">Vui lòng nhập nội dung!</div>}
       <ul className="todo-list__list">
         {taskList.map((task, index) => (
-          <li key={index} className={task.completed ? 'completed' : ''}>
-            <input
-              onChange={() => handleComplete(index)}
-              type="checkbox"
-              id={`input-checkbox-${index}`}
-              checked={task.completed}
-            />
-            <label
-              className='text-label'
-              htmlFor={`input-checkbox-${index}`}
-            >{task.name}</label>
-            <i onClick={() => handleEdit(task, index)} className='bx bx-edit edit'></i>
-            <i onClick={() => handleDelete(index)} className='bx bx-trash delete'></i>
-          </li>
+          <div key={index} className='list-item'>
+            <li className={task.completed ? 'completed' : ''}>
+              <input
+                onChange={() => handleComplete(index)}
+                type="checkbox"
+                id={`input-checkbox-${index}`}
+                checked={task.completed}
+              />
+              <label
+                className='text-label'
+                htmlFor={`input-checkbox-${index}`}
+              >{task.name}</label>
+              <i onClick={() => handleEdit(task, index)} className='bx bx-edit edit'></i>
+              <i onClick={() => handleDelete(index)} className='bx bx-trash delete'></i>
+            </li>
+            <span className='create-task'>{task.createAt}</span>
+          </div>
         ))}
       </ul>
     </div>

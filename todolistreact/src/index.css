@@ -18,7 +18,7 @@ body {
 }
 
 .todo-list {
-  max-width: 600px;
+  max-width: 700px;
   margin: 100px auto;
   padding: 40px 30px;
   border-radius: 10px;
@@ -86,10 +86,13 @@ body {
   margin-top: 20px;
 }
 
+.todo-list__list .list-item {
+  margin-top: 14px;
+}
+
 .todo-list__list li {
   list-style: none;
   padding: 10px 20px;
-  margin-bottom: 10px;
   user-select: none;
   font-size: 20px;
   background-color: rgb(246, 246, 246);
@@ -146,6 +149,15 @@ input[type="checkbox"] {
   border: 2px solid #e1e1e1;
   cursor: pointer;
 }
+
+.create-task {
+  display: block;
+  font-size: 14px;
+  white-space: nowrap;
+  text-align: end;
+  padding-right: 3px;
+}
+
 
 @media (max-width: 46.1875em) {
   body {
