@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './index.css';
 import 'boxicons/css/boxicons.min.css';
 function App() {
