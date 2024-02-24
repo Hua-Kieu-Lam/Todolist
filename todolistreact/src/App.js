@@ -38,6 +38,7 @@ function App() {
   const handleEdit = (task, index) => {
     setTask(task.name)
     handleDelete(index)
+    taskRef.current.focus()
   }
 
   const handleDelete = (index) => {
