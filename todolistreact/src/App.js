@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import 'boxicons/css/boxicons.min.css';
 import { format } from 'date-fns';
+
 function App() {
   const [task, setTask] = useState('');
   const [taskList, setTaskList] = useState(() => {
@@ -8,6 +9,7 @@ function App() {
     return storedTasks ?? []
   });
   const [error, setError] = useState(false);
+  const taskRef = useRef();
 
   useEffect(() => {
     localStorage.setItem('Tasks', JSON.stringify(taskList));
@@ -17,6 +19,7 @@ function App() {
     setTask(e.target.value)
     setError(false)
   }
+
   const handleAdd = () => {
     if (task.trim() !== '') {
       const newTask = {
@@ -29,6 +32,7 @@ function App() {
       setError(true)
     }
     setTask('')
+    taskRef.current.focus()
   }
 
   const handleEdit = (task, index) => {
@@ -67,6 +71,7 @@ function App() {
       </div>
       <div className="todo-list__add-text">
         <input
+          ref={taskRef}
           value={task}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
